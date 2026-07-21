@@ -1,0 +1,21 @@
+// =======================
+// WARD
+// =======================
+
+model Ward {
+  id            String   @id
+  tenantId      String
+  branchId      String
+  clinicId      String
+  departmentId  String
+
+  name          String
+  type          String
+  capacity      Int
+
+  createdAt     DateTime @default(now())
+
+  branch         Branch     @relation(fields: [branchId], references: [id])
+  department     Department @relation(fields: [departmentId], references: [id])
+  @@map("wards")
+}

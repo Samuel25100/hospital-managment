@@ -1,0 +1,39 @@
+// =======================
+// ROOM
+// =======================
+enum RoomType {
+  CONSULTATION
+  WARD
+  ICU
+  OPERATION
+  LABORATORY
+}
+
+enum RoomStatus {
+  AVAILABLE
+  OCCUPIED
+  MAINTENANCE
+}
+
+model Room {
+  id            String      @id
+  tenantId      String
+  branchId      String
+  clinicId      String
+  departmentId  String
+
+  roomNumber    String
+  roomType      RoomType
+  floor         String
+
+  status        RoomStatus @default(AVAILABLE)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  branch         Branch     @relation(fields: [branchId], references: [id])
+  department     Department @relation(fields: [departmentId], references: [id])
+
+  beds          Bed[]
+  @@map("rooms")
+}

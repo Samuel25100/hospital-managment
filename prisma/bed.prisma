@@ -1,0 +1,23 @@
+// =======================
+// BED
+// =======================
+enum BedStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+}
+
+
+model Bed {
+  id          String      @id
+  tenantId    String
+  roomId       String
+  bedNumber    String
+  status       BedStatus @default(AVAILABLE)
+  patientId    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  room         Room      @relation(fields: [roomId], references: [id])
+
+  @@map("beds")
+}

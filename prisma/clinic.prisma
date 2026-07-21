@@ -1,0 +1,21 @@
+
+enum Status {
+  active
+  inactive
+}
+
+model Clinic {
+  id                 String   @id @default(cuid())
+  tenantId           String
+  name               String
+  registrationNumber String   @unique
+  email              String   @unique
+  phone              String
+  website            String?
+  addressId          String
+  logo               String?
+  status             Status   @default(active)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  @@map("clinics")
+}
